@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="icons8-clock-16.png" type="image/x-icon">
+	<style>
+		body {
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	color: #000;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+h1 {
+	font-size: 10rem;
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+	h1 {
+		font-size: 6rem;
+	}
+}
+
+.dark-mode {
+	background-color: #000;
+	color: #fff;
+}
+
+button {
+	background-color: #fff;
+	color: #000;
+	border: none;
+	border-radius: 10px;
+	padding: 10px 20px;
+	font-size: 1.2rem;
+	font-family: 'Montserrat', sans-serif;
+	cursor: pointer;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+button:hover {
+	background-color: #000;
+	color: #fff;
+}
+
+button .icon {
+	margin-left: 10px;
+	font-size: 1.5rem;
+	vertical-align: middle;
+}
+
+@media only screen and (max-width: 768px) {
+	button {
+		font-size: 1rem;
+		padding: 5px 10px;
+	}
+
+	button .icon {
+		font-size: 1rem;
+	}
+}
+
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	<title id="pageTitle"></title>
+    <script>
+      var today = new Date();
+      var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      var dateStr = today.toLocaleDateString('en-US', options);
+      document.getElementById("pageTitle").innerHTML = "" + dateStr;
+    </script>
+	
+</head>
+<body>
+	<div class="container">
+		<h1 id="time"></h1>
+		<button id="theme-toggle"><span class="text">Toggle Theme</span><span class="icon">&#x263c;</span></button>
+	</div>
+
+	<script>function updateTime() {
+		const timeElement = document.getElementById('time');
+		const now = new Date();
+		const hours = now.getHours().toString().padStart(2, '0');
+		const minutes = now.getMinutes().toString().padStart(2, '0');
+		const seconds = now.getSeconds().toString().padStart(2, '0');
+		timeElement.innerHTML = `${hours}:${minutes}:${seconds}`;
+	}
+	
+	function toggleTheme() {
+		const body = document.body;
+		body.classList.toggle('dark-mode');
+	}
+	
+	setInterval(updateTime, 1000);
+	
+	const themeToggle = document.getElementById('theme-toggle');
+	themeToggle.addEventListener('click', toggleTheme);
+	</script>
+	
+</body>
+</html>
